@@ -1,18 +1,16 @@
-import React from 'react';
-import './App.css'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Home from '../src/pages/Home';
-import ForYou from '../src/pages/ForYou';
-import LoginModal from './components/LoginModal';
+import React from "react";
+import "./App.css";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Home from "./pages/Home";
+import ForYou from "./pages/ForYou";
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/ForYou" element={<ForYou />} />
+        <Route path="forYou" element={<ForYou />} />
       </Routes>
-      <LoginModal />
     </Router>
   );
 }

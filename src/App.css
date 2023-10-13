@@ -631,3 +631,19 @@ button:disabled {
     display: none;
   }
 }
+
+/* Sidebar */
+
+.sidebar {
+  width: 250px;
+  background-color: #f7faf9;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.sidebar-img {
+  width: 200px;
+  
+}

@@ -1,8 +1,9 @@
-import React from 'react'
+import React from 'react';
+import Sidebar from '../components/Sidebar';
 
 const ForYou = () => {
   return (
-    <div>ForYou</div>
+    <Sidebar />
   )
 }
 
