@@ -7,12 +7,9 @@ function LoginModal({ isOpen, onClose }) {
   const [loginSuccess, setLoginSuccess] = useState(false);
 
   const handleLogin = () => {
-    // Check if the username and password are correct
     if (username === "guest@gmail.com" && password === "guest123") {
-      // Set the login success state to true
       setLoginSuccess(true);
     } else {
-    
       alert("Incorrect username or password. Please try again.");
     }
   };

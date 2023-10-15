@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom"; // Import the Link component
-import { AiOutlineStar } from "react-icons/ai";
+import { AiOutlineStar } from "react-icons/ai"
 
-const Recommended = () => {
+const Suggested = () => {
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
-    fetch('https://us-central1-summaristt.cloudfunctions.net/getBooks?status=recommended')
+    // Make a GET request to the API
+    fetch('https://us-central1-summaristt.cloudfunctions.net/getBooks?status=suggested')
       .then(response => response.json())
       .then(data => {
+        // Set the first 5 books from the API response to the state
         setBooks(data.slice(0, 5));
       })
       .catch(error => console.error('Error fetching data: ', error));
@@ -16,11 +17,11 @@ const Recommended = () => {
 
   return (
     <div>
-      <p className="recommended-heading">Recommended For You</p>
-      <p className="recommended-subheading">We think you'll like these</p>
+      <p className="recommended-heading">Suggested Books</p>
+      <p className="recommended-subheading">Browse some more books</p>
       <div className="recommended-books-container">
         {books.map(book => (
-          <Link to={`/book/${book.id}`} key={book.id} className="book-card">
+          <div key={book.id} className="book-card">
             <div className="subscription-status">
               {book.subscriptionRequired ? "Premium" : "Free"}
             </div>
@@ -33,11 +34,11 @@ const Recommended = () => {
                 <p className="rating"><AiOutlineStar />{book.averageRating}</p>
               </div>
             </div>
-          </Link>
+          </div>
         ))}
       </div>
     </div>
   );
 };
 
-export default Recommended;
+export default Suggested;
