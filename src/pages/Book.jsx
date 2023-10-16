@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import SearchBar from "../components/SearchBar";
 import { AiOutlineStar } from "react-icons/ai";
@@ -11,7 +11,7 @@ import { PiBookmarkSimpleBold } from "react-icons/pi";
 
 const Book = () => {
   const { id } = useParams();
-
+  const navigate = useNavigate();
   const [book, setBook] = useState(null);
 
   useEffect(() => {
@@ -60,13 +60,23 @@ const Book = () => {
                 </div>
               </div>
               <div className="book-buttons">
-                <button className="active-book-button">
+              <button
+                  className="active-book-button"
+                  onClick={() => {
+                    navigate(`/player/${id}`); // Use navigate to go to the player route
+                  }}
+                >
                   <span className="book-button-inner">
                     <PiBookOpenText className="feature-icon" size={20} />
                     Read
                   </span>
                 </button>
-                <button className="active-book-button">
+                <button
+                  className="active-book-button"
+                  onClick={() => {
+                    navigate(`/player/${id}`); // Use navigate to go to the player route
+                  }}
+                >
                   <span className="book-button-inner">
                     <AiOutlineAudio className="feature-icon" size={20} />
                     Listen
