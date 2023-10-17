@@ -951,7 +951,6 @@ button:disabled {
 
 .player-book-container {
   margin: 20px 200px 0 500px;
-  
 }
 
 .player-book-header {
@@ -1001,8 +1000,8 @@ button:disabled {
 }
 
 .player-book-info {
-font-size: 14px;
-margin-bottom: 5px;
+  font-size: 14px;
+  margin-bottom: 5px;
 }
 
 .player-book-info-author {
@@ -1042,10 +1041,10 @@ margin-bottom: 5px;
 
 input[type="range"] {
   --range-progress: 0;
-  
+
   -webkit-appearance: none;
   position: relative;
-  background:#9e9e9e;
+  background: #9e9e9e;
   width: 100%;
   height: 4px;
   border-radius: 2px;
@@ -1055,7 +1054,7 @@ input[type="range"] {
 /* Input range - firefox */
 input[type="range"]::-moz-range-track {
   position: relative;
-  background:#8b8b8b;
+  background: #8b8b8b;
   width: 100%;
   height: 4px;
   border-radius: 2px;
@@ -1064,7 +1063,7 @@ input[type="range"]::-moz-range-track {
 
 /* played progress length - Chrome & safari*/
 input[type="range"]::before {
-  content: '';
+  content: "";
   height: 2px;
   background: rgb(255, 255, 255);
   width: var(--range-progress);
@@ -1113,4 +1112,203 @@ input[type="range"]::-moz-range-thumb {
 /* dragging thumb - firefox */
 input[type="range"]:active::-moz-range-thumb {
   transform: scale(1.2);
+}
+
+/* CHOOSE PLAN */
+
+.choose-plan-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.choose-plan-landing {
+  width: 100vw;
+  background-color: #032b41;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #fff;
+  border-radius: 0 0 80% 80%;
+}
+
+.choose-plan-header {
+  font-size: 48px;
+  font-weight: bold;
+  margin-top: 40px;
+}
+
+.choose-plan-subheading {
+  font-size: 20px;
+  margin: 40px 0;
+}
+
+.choose-plan-landing-img {
+  width: 300px;
+  border-radius: 50px 50px 0 0;
+}
+
+.choose-plan-features {
+  display: flex;
+}
+
+.plan-icons {
+  margin-bottom: 20px;
+}
+
+.plan-feature {
+  font-size: 16px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: 50px 30px;
+  color: #032b41;
+}
+
+.plan-span {
+  font-weight: bold;
+}
+
+.plans-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.plans-header {
+  font-size: 32px;
+  font-weight: bold;
+  margin: 30px;
+  color: #032b41;
+}
+
+.plan-card-container {
+  width: 680px;
+  border: solid 4px #2bd97c;
+  display: flex;
+  padding: 20px;
+  background-color: #f1f6f4;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.plan-inner-icon {
+  margin-top: 2px;
+  margin-right: 18px;
+  color: #032b41;
+}
+
+.plan-yearly-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #032b41;
+}
+
+.plan-yearly-pricing {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 10px 0;
+  color: #032b41;
+}
+
+.plan-free-trial {
+font-size: 14px;
+font-weight: 300;
+}
+
+.plan-card-divider {
+  font-size: 14px;
+  margin: 20px;
+  color: #6b757b;
+}
+
+.plan-questions-container {
+  margin: 40px;
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  width: 1000px;
+}
+
+.plan-questions {
+  font-size: 24px;
+  font-weight: bold;
+  display: flex;
+  flex-wrap: wrap; 
+  justify-content: space-between;
+  width: 100%; 
+  padding: 30px;
+  border-bottom: solid 2px #f1f6f4;
+  color: #032b41;
+  cursor: pointer;
+}
+
+.answer {
+  display: none;
+  width: 100%; 
+  text-align: left; 
+}
+
+.answer.show {
+  display: block;
+}
+
+.question-answer {
+  font-size: 16px;
+  padding-top: 10px;
+  color: #394547;
+  font-weight: 300;
+  transition: smooth;
+}
+
+/* SETTINGS */
+
+.settings-container {
+  margin: 50px 200px 0 400px;
+}
+
+.settings-header {
+  font-size: 32px;
+  color: #032b41;
+  padding-bottom: 10px;
+  width: 100%;
+  border-bottom: solid 2px #f1f6f4;
+  font-weight: bold;
+}
+
+.plan-header {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.plan {
+  margin: 10px 0;
+}
+
+.upgrade-button {
+  padding: 10px;
+  background-color: #2bd97c;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.settings-plan {
+  width: 100%;
+  border-bottom: solid 2px #f1f6f4;
+  color: #032b41;
+  padding: 20px 0;
+}
+
+.settings-email-header {
+  font-size: 18px;
+  font-weight: bold;
+  color: #032b41;
+  margin: 10px 0;
+}
+
+.settings-email {
+  font-size: 16px;
+  color: #032b41;
 }
