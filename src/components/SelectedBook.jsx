@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { BsPlayCircle } from "react-icons/bs";
 
 const SelectedBook = () => {
   const [bookData, setBookData] = useState(null);
+  const [audioRef, setAudioRef] = useState(null);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
     const apiUrl =
@@ -16,6 +19,17 @@ const SelectedBook = () => {
         console.error("Error fetching data:", error);
       });
   }, []);
+
+  const playAudio = () => {
+    if (audioRef) {
+      if (isPlaying) {
+        audioRef.pause();
+      } else {
+        audioRef.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
 
   return (
     <div>
@@ -32,6 +46,22 @@ const SelectedBook = () => {
             <div className="selected-book-info">
               <p className="selected-title">{book.title}</p>
               <p className="selected-author">{book.author}</p>
+              {book.audioLink && (
+                <div className="audio-controls">
+                  <button onClick={playAudio}>
+                    {isPlaying ? (
+                      <BsPlayCircle size={24} />
+                    ) : (
+                      <BsPlayCircle size={24} />
+                    )}
+                  </button>
+                  <audio
+                    ref={(audio) => setAudioRef(audio)}
+                    src={book.audioLink}
+                  ></audio>
+                  <p className="listen-to-summary">Listen to summary</p>
+                </div>
+              )}
             </div>
           </div>
         ))

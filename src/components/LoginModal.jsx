@@ -1,5 +1,29 @@
 import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
+import { initializeApp } from "firebase/app";
+import {
+  getAuth,
+  signInWithPopup,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
+  GoogleAuthProvider,
+  signOut,
+} from "firebase/auth";
+
+// Initialize Firebase
+const firebaseConfig = {
+  apiKey: "AIzaSyClZWtlPaOKeKcIcld-81059xfbEtZMauw",
+  authDomain: "summarist-973d2.firebaseapp.com",
+  projectId: "summarist-973d2",
+  storageBucket: "summarist-973d2.appspot.com",
+  messagingSenderId: "589316949635",
+  appId: "1:589316949635:web:5eaa09103da81793b47db6",
+  measurementId: "G-GVQFHLWJX8",
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
 function LoginModal({ isOpen, onClose }) {
   const [username, setUsername] = useState("");
@@ -7,11 +31,56 @@ function LoginModal({ isOpen, onClose }) {
   const [loginSuccess, setLoginSuccess] = useState(false);
 
   const handleLogin = () => {
-    if (username === "guest@gmail.com" && password === "guest123") {
-      setLoginSuccess(true);
-    } else {
-      alert("Incorrect username or password. Please try again.");
-    }
+    signInWithEmailAndPassword(auth, username, password)
+      .then((userCredential) => {
+        // User logged in successfully
+        setLoginSuccess(true);
+      })
+      .catch((error) => {
+        alert("Incorrect username or password. Please try again.");
+      });
+  };
+
+  const handleRegister = () => {
+    createUserWithEmailAndPassword(auth, username, password)
+      .then((userCredential) => {
+        // User registered successfully
+        setLoginSuccess(true);
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
+  };
+
+  const handleLogout = () => {
+    signOut(auth);
+  };
+
+  const handleForgotPassword = () => {
+    sendPasswordResetEmail(auth, username)
+      .then(() => {
+        alert("Password reset email sent. Check your inbox.");
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
+  };
+
+  const handleGuestLogin = () => {
+    // Simulate a guest login; you can customize this as needed
+    setLoginSuccess(true);
+  };
+
+  const handleGoogleLogin = () => {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
+      .then((userCredential) => {
+        // User logged in with Google
+        setLoginSuccess(true);
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
   };
 
   return (
@@ -22,11 +91,15 @@ function LoginModal({ isOpen, onClose }) {
       <div className="modal-content">
         <h2 className="modal-header">Log in to Summarist</h2>
         <form className="modal-form">
-          <button className="guest-login">Login as a Guest</button>
+          <button className="guest-login" onClick={handleGuestLogin}>
+            Login as a Guest
+          </button>
           <div className="divider">
             <span>or</span>
           </div>
-          <button className="google-login">Login with Google</button>
+          <button className="google-login" onClick={handleGoogleLogin}>
+            Login with Google
+          </button>
           <div className="divider">
             <span>already have an account?</span>
           </div>
@@ -44,14 +117,20 @@ function LoginModal({ isOpen, onClose }) {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button className="login-submit" type="submit" onClick={handleLogin}>
+          <button className="login-submit" type="button" onClick={handleLogin}>
             Login
           </button>
+          <button
+            className="login-submit"
+            type="button"
+            onClick={handleRegister}
+          >
+            Register
+          </button>
           <p className="recovery">
-            <a href="#">Forgot your password?</a>
-          </p>
-          <p className="recovery">
-            <a href="#">Don't have an account?</a>
+            <a href="#" onClick={handleForgotPassword}>
+              Forgot your password?
+            </a>
           </p>
           {loginSuccess && <Navigate to="/forYou" />}
         </form>

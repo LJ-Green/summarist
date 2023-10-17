@@ -4,7 +4,7 @@ import { PiPottedPlantFill } from "react-icons/pi";
 import { FaHandshakeSimple } from "react-icons/fa6";
 import { BsCircle } from "react-icons/bs";
 import { BsChevronDown } from "react-icons/bs";
-import Footer from "./Footer";
+import Footer from "../components/Footer";
 
 const ChoosePlan = () => {
   const [activeIndex, setActiveIndex] = useState(-1);
