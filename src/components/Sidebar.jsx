@@ -5,12 +5,11 @@ import { BsBookmark } from "react-icons/bs";
 import { BsPen } from "react-icons/bs";
 import { BsSearch } from "react-icons/bs";
 import { FiSettings } from "react-icons/fi";
-import { BiHelpCircle } from "react-icons/bi";
 import { FiLogIn } from "react-icons/fi";
 
 const Sidebar = ({ activePage }) => {
   const sidebarLinks = [
-    { name: "For you", icon: <AiOutlineHome size={25} className="sidebar-icon" /> },
+    { name: "For You", icon: <AiOutlineHome size={25} className="sidebar-icon" /> },
     { name: "My Library", icon: <BsBookmark size={25} className="sidebar-icon" /> },
     { name: "Highlights", icon: <BsPen size={25} className="sidebar-icon" /> },
     { name: "Search", icon: <BsSearch size={25} className="sidebar-icon" /> },
@@ -18,9 +17,18 @@ const Sidebar = ({ activePage }) => {
 
   const sidebarBottomLinks = [
     { name: "Settings", icon: <FiSettings size={25} className="sidebar-icon" /> },
-    { name: "Help & Support", icon: <BiHelpCircle size={25} className="sidebar-icon" /> },
     { name: "Login", icon: <FiLogIn size={25} className="sidebar-icon" /> },
   ];
+
+  const handleSidebarLinkClick = (linkName) => {
+    const linksToRedirect = ["For You", "My Library", "Highlights", "Search", "Help & Support"];
+  
+    if (linksToRedirect.includes(linkName)) {
+      window.location.href = "/foryou";
+    } else {
+      window.location.href = `/${linkName.toLowerCase()}`;
+    }
+  };
 
   return (
     <div className="sidebar">
@@ -40,12 +48,10 @@ const Sidebar = ({ activePage }) => {
                 activePage === link.name ? "active" : ""
               }`}
             >
-              <Link to={`/${link.name === "For you" ? "forYou" : link.name.toLowerCase()}`}>
-                <div className="list-content">
-                  {link.icon}
-                  <span className="list-text">{link.name}</span>
-                </div>
-              </Link>
+              <div className="list-content" onClick={() => handleSidebarLinkClick(link.name)}>
+                {link.icon}
+                <span className="list-text">{link.name}</span>
+              </div>
             </li>
           ))}
         </ul>
