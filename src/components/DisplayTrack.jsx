@@ -2,7 +2,7 @@ import React from "react";
 
 const DisplayTrack = ({ book }) => {
   if (!book) {
-    return <p>Loading...</p>;
+    return 
   }
 
   return (

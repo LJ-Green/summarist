@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BsSearch } from "react-icons/bs";
-import { Link } from "react-router-dom"; // Import Link from React Router
+import { Link } from "react-router-dom";
 
 const SearchBar = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -20,7 +20,6 @@ const SearchBar = () => {
 
   useEffect(() => {
     if (debouncedSearchTerm) {
-      // Perform your API request here
       setIsSearching(true);
 
       fetch(
@@ -41,31 +40,28 @@ const SearchBar = () => {
   }, [debouncedSearchTerm]);
 
   return (
-    <div className="search-container">
-      <div className="search-input-container">
+    <section className="search-container">
+      <div className="searchbar-wrapper">
         <input
           className="search-input"
-          placeholder="Search for books"
+          placeholder="Search for Books..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <BsSearch size={25} className="search-icon" />
+        <BsSearch size={22} className="search-icon" />
       </div>
-
-      {isSearching && <div>Loading...</div>}
-
       {searchResults.length > 0 && (
         <div className="search-results">
           <ul>
             {searchResults.map((result, index) => (
-                <Link
-                  to={
-                    result.subscriptionRequired
-                      ? "/chooseplan"
-                      : `/book/${result.id}`
-                  }
-                >
-              <li className="result-list" key={index}>
+              <Link
+                to={
+                  result.subscriptionRequired
+                    ? "/chooseplan"
+                    : `/book/${result.id}`
+                }
+              >
+                <li className="result-list" key={index}>
                   <div>
                     <img className="result-img" src={result.imageLink} />
                   </div>
@@ -78,13 +74,13 @@ const SearchBar = () => {
                       <p className="search-subscription">Free</p>
                     )}
                   </div>
-              </li>
-                </Link>
+                </li>
+              </Link>
             ))}
           </ul>
         </div>
       )}
-    </div>
+    </section>
   );
 };
 

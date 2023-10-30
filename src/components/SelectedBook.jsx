@@ -5,6 +5,7 @@ const SelectedBook = () => {
   const [bookData, setBookData] = useState(null);
   const [audioRef, setAudioRef] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isLoading, setIsLoading] = useState(true); // Add isLoading state
 
   useEffect(() => {
     const apiUrl =
@@ -14,6 +15,7 @@ const SelectedBook = () => {
       .then((response) => response.json())
       .then((data) => {
         setBookData(data);
+        setIsLoading(false); // Set isLoading to false when data is loaded
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
@@ -33,7 +35,7 @@ const SelectedBook = () => {
 
   return (
     <div>
-      <p className="selected-heading">Selected just for you</p>
+      {!isLoading && <p className="selected-heading">Selected just for you</p>}
       {bookData && bookData.length > 0 ? (
         bookData.map((book, index) => (
           <div className="selected-wrapper" key={book.id}>
@@ -66,7 +68,16 @@ const SelectedBook = () => {
           </div>
         ))
       ) : (
-        <p>Loading...</p>
+        <>
+          {isLoading ? (
+            <>
+              <div className="selected-skeleton-header"></div>
+              <div className="skeleton-selected"></div>
+            </>
+          ) : (
+            <p>No selected books available.</p>
+          )}
+        </>
       )}
     </div>
   );

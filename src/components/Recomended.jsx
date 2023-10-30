@@ -1,52 +1,43 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom"; // Import the Link and useNavigate
-import { AiOutlineStar } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
+import BookCard from "./BookCard";
 
 const Recommended = () => {
   const [books, setBooks] = useState([]);
-  const navigate = useNavigate(); // Get the navigation function
+  const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('https://us-central1-summaristt.cloudfunctions.net/getBooks?status=recommended')
-      .then(response => response.json())
-      .then(data => {
-        setBooks(data.slice(0, 5));
+    fetch(
+      "https://us-central1-summaristt.cloudfunctions.net/getBooks?status=recommended"
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setBooks(data.slice(0, 7));
       })
-      .catch(error => console.error('Error fetching data: ', error));
+      .catch((error) => {
+        console.error("Error fetching data: ", error);
+      });
   }, []);
 
   const handleBookClick = (book) => {
     if (book.subscriptionRequired) {
-      navigate("/chooseplan"); // Send the user to the "ChoosePlan" page
+      navigate("/chooseplan");
     } else {
-      navigate(`/book/${book.id}`); // Send the user to the book details page
+      navigate(`/book/${book.id}`);
     }
   };
 
   return (
     <div>
-      <p className="recommended-heading">Recommended For You</p>
-      <p className="recommended-subheading">We think you'll like these</p>
-      <div className="recommended-books-container">
-        {books.map(book => (
-          <div
+      <p className="foryou-heading">Recommended For You</p>
+      <p className="foryou-subheading">We think you'll like these</p>
+      <div className="books-container">
+      {books.map((book) => (
+          <BookCard
             key={book.id}
-            className="book-card"
-            onClick={() => handleBookClick(book)} // Handle the click event
-          >
-            <div className="subscription-status">
-              {book.subscriptionRequired ? "Premium" : "Free"}
-            </div>
-            <img className="recommended-img" src={book.imageLink} alt={book.title} />
-            <div className="book-details">
-              <p className="recommended-title">{book.title}</p>
-              <p className="recommended-author">{book.author}</p>
-              <p className="recommended-subtitle">{book.subTitle}</p>
-              <div className="recommended-book-numerical-info">
-                <p className="rating"><AiOutlineStar />{book.averageRating}</p>
-              </div>
-            </div>
-          </div>
+            book={book}
+            handleBookClick={handleBookClick}
+          />
         ))}
       </div>
     </div>

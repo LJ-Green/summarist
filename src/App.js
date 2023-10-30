@@ -7,6 +7,7 @@ import Book from "./pages/Book";
 import Player from "./pages/Player";
 import ChoosePlan from "./pages/ChoosePlan";
 import Settings from "./pages/Settings";
+import MyLibrary from "./pages/MyLibrary";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="foryou" element={<ForYou />} />
         <Route path="book/:id" element={<Book />} />
+        <Route path="mylibrary" element={<MyLibrary />} />
         <Route path="player/:id" element={<Player />} />
         <Route path="chooseplan" element={<ChoosePlan />} />
         <Route path="settings" element={<Settings />} />

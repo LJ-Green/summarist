@@ -13,6 +13,7 @@ const Book = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [book, setBook] = useState(null);
+  const [isAdded, setIsAdded] = useState(false);
 
   useEffect(() => {
     fetch(`https://us-central1-summaristt.cloudfunctions.net/getBook?id=${id}`)
@@ -22,6 +23,21 @@ const Book = () => {
       })
       .catch((error) => console.error("Error fetching data: ", error));
   }, [id]);
+
+  useEffect(() => {
+    const savedBooksFromStorage = localStorage.getItem("savedBooks");
+    const savedBooks = savedBooksFromStorage ? JSON.parse(savedBooksFromStorage) : [];
+    const bookExists = savedBooks.some((savedBook) => savedBook.id === id);
+    setIsAdded(bookExists);
+  }, [id]);
+
+  const handleBookClick = (book) => {
+    const savedBooksFromStorage = localStorage.getItem("savedBooks");
+    const savedBooks = savedBooksFromStorage ? JSON.parse(savedBooksFromStorage) : [];
+    const updatedBooks = [...savedBooks, book];
+    localStorage.setItem("savedBooks", JSON.stringify(updatedBooks));
+    setIsAdded(true);
+  };
 
   return (
     <>
@@ -60,10 +76,10 @@ const Book = () => {
                 </div>
               </div>
               <div className="book-buttons">
-              <button
+                <button
                   className="active-book-button"
                   onClick={() => {
-                    navigate(`/player/${id}`); // Use navigate to go to the player route
+                    navigate(`/player/${id}`);
                   }}
                 >
                   <span className="book-button-inner">
@@ -74,7 +90,7 @@ const Book = () => {
                 <button
                   className="active-book-button"
                   onClick={() => {
-                    navigate(`/player/${id}`); // Use navigate to go to the player route
+                    navigate(`/player/${id}`);
                   }}
                 >
                   <span className="book-button-inner">
@@ -84,9 +100,22 @@ const Book = () => {
                 </button>
               </div>
               <div className="add-to-library">
-                <span className="add-to-inner">
-                  <PiBookmarkSimpleBold className="feature-icon" size={26} />
-                  Add title to My Library
+                <span
+                  className="add-to-inner"
+                  onClick={() => !isAdded && handleBookClick(book)}
+                  style={{ cursor: isAdded ? 'not-allowed' : 'pointer', opacity: isAdded ? 0.5 : 1 }}
+                >
+                  {isAdded ? (
+                    <>
+                      <PiBookmarkSimpleBold className="feature-icon" size={26} />
+                      Added
+                    </>
+                  ) : (
+                    <>
+                      <PiBookmarkSimpleBold className="feature-icon" size={26} />
+                      Add title to My Library
+                    </>
+                  )}
                 </span>
               </div>
               <div className="book-tags">
@@ -104,11 +133,7 @@ const Book = () => {
               <p>{book.authorDescription}</p>
             </div>
             <div className="active-book-img-container">
-              <img
-                className="active-book-img"
-                src={book.imageLink}
-                alt={book.title}
-              />
+              <img className="active-book-img" src={book.imageLink} alt={book.title} />
             </div>
           </div>
         </>

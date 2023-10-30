@@ -1,81 +1,86 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineHome } from "react-icons/ai";
 import { BsBookmark } from "react-icons/bs";
 import { BsPen } from "react-icons/bs";
-import { BsSearch } from "react-icons/bs";
 import { FiSettings } from "react-icons/fi";
 import { FiLogIn } from "react-icons/fi";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 const Sidebar = ({ activePage }) => {
-  const sidebarLinks = [
-    { name: "For You", icon: <AiOutlineHome size={25} className="sidebar-icon" /> },
-    { name: "My Library", icon: <BsBookmark size={25} className="sidebar-icon" /> },
-    { name: "Highlights", icon: <BsPen size={25} className="sidebar-icon" /> },
-    { name: "Search", icon: <BsSearch size={25} className="sidebar-icon" /> },
-  ];
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const navigate = useNavigate();
 
-  const sidebarBottomLinks = [
-    { name: "Settings", icon: <FiSettings size={25} className="sidebar-icon" /> },
-    { name: "Login", icon: <FiLogIn size={25} className="sidebar-icon" /> },
-  ];
-
-  const handleSidebarLinkClick = (linkName) => {
-    const linksToRedirect = ["For You", "My Library", "Highlights", "Search", "Help & Support"];
-  
-    if (linksToRedirect.includes(linkName)) {
-      window.location.href = "/foryou";
+  const toggleSidebar = () => {
+    console.log('working');
+    setIsSidebarOpen(!isSidebarOpen);
+    const sidebarWrapper = document.querySelector('.sidebar-wrapper');
+    if (isSidebarOpen) {
+      sidebarWrapper.classList.remove('show');
     } else {
-      window.location.href = `/${linkName.toLowerCase()}`;
+      sidebarWrapper.classList.add('show');
     }
   };
 
+  const sidebarLinks = [
+    {
+      name: "For You",
+      path: "/foryou",
+      icon: <AiOutlineHome size={25} className="sidebar-icon" />,
+    },
+    {
+      name: "My Library",
+      path: "/mylibrary",
+      icon: <BsBookmark size={25} className="sidebar-icon" />,
+    },
+    {
+      name: "Highlights",
+      path: "/highlights",
+      icon: <BsPen size={25} className="sidebar-icon" />,
+    },
+    {
+      name: "Settings",
+      path: "/settings",
+      icon: <FiSettings size={25} className="sidebar-icon" />,
+    },
+    {
+      name: "Login",
+      path: "/login",
+      icon: <FiLogIn size={25} className="sidebar-icon" />,
+    },
+  ];
+
   return (
-    <div className="sidebar">
-      <figure>
-        <img
-          className="sidebar-img"
-          src="https://summarist.vercel.app/_next/static/media/logo.1b1c490b.png"
-          alt="logo"
-        />
-      </figure>
-      <div className="sidebar-top">
-        <ul className="sidebar-group">
-          {sidebarLinks.map((link) => (
-            <li
-              key={link.name}
-              className={`sidebar-list ${
-                activePage === link.name ? "active" : ""
-              }`}
-            >
-              <div className="list-content" onClick={() => handleSidebarLinkClick(link.name)}>
+    <>
+      <div className="hamburger-menu" onClick={toggleSidebar}>
+        <GiHamburgerMenu size={25} />
+      </div>
+      <div className="sidebar-wrapper">
+        <figure>
+          <img
+            className="sidebar-logo"
+            src="https://summarist.vercel.app/_next/static/media/logo.1b1c490b.png"
+            alt="logo"
+          />
+        </figure>
+        <div>
+          <ul>
+            {sidebarLinks.map((link) => (
+              <li
+                key={link.name}
+                className={`sidebar-link ${
+                  activePage === link.name ? "active" : ""
+                }`}
+                onClick={() => navigate(link.path)}
+              >
                 {link.icon}
-                <span className="list-text">{link.name}</span>
-              </div>
-            </li>
-          ))}
-        </ul>
+                <span className="link-name">{link.name}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
-      <div className="sidebar-bottom">
-        <ul className="sidebar-group">
-          {sidebarBottomLinks.map((link) => (
-            <li
-              key={link.name}
-              className={`sidebar-list ${
-                activePage === link.name ? "active" : ""
-              }`}
-            >
-              <Link to={`/${link.name.toLowerCase()}`}>
-                <div className="list-content">
-                  {link.icon}
-                  <span className="list-text">{link.name}</span>
-                </div>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
+    </>
   );
 };
 
