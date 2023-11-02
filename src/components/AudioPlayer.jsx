@@ -1,29 +1,40 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import DisplayTrack from "./DisplayTrack";
 import Controls from "./Controls";
 import ProgressBar from "./ProgressBar";
 
 const AudioPlayer = ({ book }) => {
-  const [currentTime, setCurrentTime] = useState(0); // State to store current time
-  const [duration, setDuration] = useState(0); // State to store audio duration
-  const progressBarRef = useRef(null); 
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const progressBarRef = useRef(null);
+
+  useEffect(() => {
+    const audio = document.querySelector('audio');
+    audio.addEventListener('timeupdate', handleTimeUpdate);
+    audio.addEventListener('loadedmetadata', handleLoadedMetadata);
+    return () => {
+      audio.removeEventListener('timeupdate', handleTimeUpdate);
+      audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
+    };
+  }, []);
 
   const handleTimeUpdate = (e) => {
-    // Update the currentTime state when the audio time is changed
     setCurrentTime(e.target.currentTime);
   };
 
   const handleLoadedMetadata = (e) => {
-    // Update the duration state when audio metadata is loaded
     setDuration(e.target.duration);
   };
 
   const handleProgressBarChange = () => {
-    // Update the audio time based on the progress bar's value
-    const newValue = progressBarRef.current.value;
-    const newTime = (newValue / 100) * duration;
-    setCurrentTime(newTime);
-  };
+  const newValue = progressBarRef.current.value;
+  const newTime = (newValue / 100) * duration;
+  const audio = document.querySelector('audio');
+  if (audio) {
+    audio.currentTime = newTime;
+    setCurrentTime(newTime); // Update the current time in the state
+  }
+};
 
   return (
     <div className="audio-player">

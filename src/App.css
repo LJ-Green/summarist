@@ -659,7 +659,7 @@ button:disabled {
 }
 
 .sidebar-link.active {
-border-left: 5px solid #2bd97c;
+  border-left: 5px solid #2bd97c;
 }
 
 .link-name {
@@ -749,7 +749,7 @@ border-left: 5px solid #2bd97c;
 }
 
 .result-title {
-  font-size: 16px; 
+  font-size: 16px;
   font-weight: bold;
   color: #032b41;
   margin-bottom: 10px;
@@ -873,6 +873,12 @@ border-left: 5px solid #2bd97c;
   max-width: 200px;
 }
 
+@media (max-width: 568px) {
+  .bookcard-img {
+    max-width: 150px;
+  }
+}
+
 .book-details {
   flex: 1;
   width: 160px;
@@ -931,12 +937,16 @@ border-left: 5px solid #2bd97c;
   margin-bottom: 20px;
 }
 
+.saved-books {
+  width: 100%;
+}
+
 .no-books-message {
   background-color: #f1f6f4;
   padding: 30px;
   text-align: center;
   width: 350px;
-  margin: 100px;
+  margin: 100px auto;
   border-radius: 20px;
 }
 
@@ -947,10 +957,9 @@ border-left: 5px solid #2bd97c;
 
 /* ACTIVE BOOK */
 
-.book-container {
+.book {
   display: flex;
   justify-content: space-between;
-  padding: 50px 100px 50px 350px;
 }
 
 .book-title {
@@ -1060,10 +1069,6 @@ border-left: 5px solid #2bd97c;
 
 /* PLAYER */
 
-.player-book-container {
-  margin: 20px 200px 0 500px;
-}
-
 .player-book-header {
   font-size: 24px;
   font-weight: bold;
@@ -1100,9 +1105,20 @@ border-left: 5px solid #2bd97c;
   color: #fff;
 }
 
+@media (max-width: 992px) {
+  .player-book-display {
+    width: 200px;
+  }
+
+  .progress {
+    width: 200px;
+  }
+}
+
 .player-book-display {
   display: flex;
   margin-left: 50px;
+  width: 300px;
 }
 
 .player-img {
@@ -1133,7 +1149,7 @@ border-left: 5px solid #2bd97c;
   display: flex;
   align-items: center;
   gap: 10px;
-  width: 400px;
+  width: 300px;
   padding-right: 50px;
 }
 
@@ -1247,6 +1263,8 @@ input[type="range"]:active::-moz-range-thumb {
   font-size: 48px;
   font-weight: bold;
   margin-top: 40px;
+  text-align: center;
+  padding: 0 40px;
 }
 
 .choose-plan-subheading {
@@ -1302,7 +1320,7 @@ input[type="range"]:active::-moz-range-thumb {
   padding: 20px;
   background-color: #f1f6f4;
   border-radius: 10px;
-  cursor: pointer;
+  cursor: not-allowed;
 }
 
 .plan-inner-icon {
@@ -1325,8 +1343,8 @@ input[type="range"]:active::-moz-range-thumb {
 }
 
 .plan-free-trial {
-font-size: 14px;
-font-weight: 300;
+  font-size: 14px;
+  font-weight: 300;
 }
 
 .plan-card-divider {
@@ -1338,18 +1356,18 @@ font-weight: 300;
 .plan-questions-container {
   margin: 40px;
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   align-items: center;
-  width: 1000px;
+  max-width: 1000px;
 }
 
 .plan-questions {
   font-size: 24px;
   font-weight: bold;
   display: flex;
-  flex-wrap: wrap; 
+  flex-wrap: wrap;
   justify-content: space-between;
-  width: 100%; 
+  width: 100%;
   padding: 30px;
   border-bottom: solid 2px #f1f6f4;
   color: #032b41;
@@ -1358,8 +1376,8 @@ font-weight: 300;
 
 .answer {
   display: none;
-  width: 100%; 
-  text-align: left; 
+  width: 100%;
+  text-align: left;
 }
 
 .answer.show {
@@ -1372,6 +1390,31 @@ font-weight: 300;
   color: #394547;
   font-weight: 300;
   transition: smooth;
+}
+
+@media (max-width: 992px) {
+  .plan-feature {
+    width: 150px;
+  }
+
+  .plan-questions {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 576px) {
+  .plan-feature {
+    width: 100px;
+  }
+  .plan-card-container {
+    width: 500px;
+  }
+  .plan-questions {
+    font-size: 14px;
+  }
+  .question {
+    max-width: 400px;
+  }
 }
 
 /* SETTINGS */
@@ -1424,9 +1467,6 @@ font-weight: 300;
   color: #032b41;
 }
 
-
-
-
 /* SKELETON LOADING STATES */
 
 /* FOR YOU */
@@ -1459,7 +1499,5 @@ font-weight: 300;
 /* RECOMENDED BOOKS */
 
 .bookcard-skeleton-container {
-display: flex;
+  display: flex;
 }
-
-

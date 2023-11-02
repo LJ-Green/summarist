@@ -3,8 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineHome } from "react-icons/ai";
 import { BsBookmark } from "react-icons/bs";
 import { BsPen } from "react-icons/bs";
-import { FiSettings } from "react-icons/fi";
-import { FiLogIn } from "react-icons/fi";
+import { FiLogOut, FiSettings } from "react-icons/fi";
 import { GiHamburgerMenu } from "react-icons/gi";
 
 const Sidebar = ({ activePage }) => {
@@ -44,9 +43,9 @@ const Sidebar = ({ activePage }) => {
       icon: <FiSettings size={25} className="sidebar-icon" />,
     },
     {
-      name: "Login",
-      path: "/login",
-      icon: <FiLogIn size={25} className="sidebar-icon" />,
+      name: "Logout",
+      path: "/",
+      icon: <FiLogOut size={25} className="sidebar-icon" />,
     },
   ];
 

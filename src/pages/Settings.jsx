@@ -15,7 +15,7 @@ const Settings = () => {
     <>
       <Sidebar activePage="Settings" />
       <SearchBar />
-      <div className="settings-container">
+      <div className="content-wrapper">
         <p className="settings-header">Settings</p>
         <div className="settings-plan">
           <p className="plan-header">Your Subscription plan</p>

@@ -21,28 +21,17 @@ const Player = () => {
     <>
       <Sidebar />
       <SearchBar />
-      <div className="player-book-container">
-        {book ? (
+      <div className="content-wrapper">
+        {book && (
           <>
             <p className="player-book-header">{book.title}</p>
-            <p
-              className="player-book-summary"
-              style={{ whiteSpace: "pre-line" }}
-            >
+            <p className="player-book-summary" style={{ whiteSpace: "pre-line" }}>
               {book.summary}
             </p>
           </>
-        ) : (
-          <div className="audio-skeleton-wrapper">
-            <div className="audio-skeleton-header"></div>
-            <div className="audio-skeleton-text"></div>
-            <div className="audio-skeleton-text"></div>
-            <div className="audio-skeleton-text"></div>
-            <div className="audio-skeleton-text"></div>
-          </div>
         )}
       </div>
-      <AudioPlayer bookId={id} book={book} />
+      {book && <AudioPlayer bookId={id} book={book} />}
     </>
   );
 };

@@ -45,7 +45,7 @@ const Book = () => {
         <>
           <Sidebar />
           <SearchBar />
-          <div className="book-container">
+          <div className="content-wrapper book">
             <div className="book-content">
               <div className="book-info">
                 <p className="book-title">{book.title}</p>

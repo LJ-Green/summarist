@@ -2,12 +2,13 @@ import React, { useState, useRef } from "react";
 import { BsPlayCircle } from "react-icons/bs";
 import { TbRewindBackward10, TbRewindForward10 } from "react-icons/tb";
 
-const Controls = ({ book }) => {
+const Controls = ({ book, updateTimeProgress }) => {
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
   // Check if the book object and audioLink property exist
   const audioLink = book && book.audioLink;
+  
 
   const togglePlayPause = () => {
     if (audioRef.current) {

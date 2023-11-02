@@ -96,7 +96,7 @@ const ChoosePlan = () => {
               key={index}
               onClick={() => toggleAnswer(index)}
             >
-              <p>{question}</p>
+              <p className="question">{question}</p>
               <BsChevronDown
                 className={`answer-icon ${activeIndex === index ? "show" : ""}`}
               />
